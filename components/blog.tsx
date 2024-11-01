@@ -1,8 +1,35 @@
+/* eslint-disable @next/next/no-img-element */
 import { formatDate } from "@/lib/dates";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { cva } from "class-variance-authority";
 import { Category } from "zenblog/types";
+
+export function PostImage({
+  src,
+  alt,
+  className,
+}: {
+  src?: string;
+  alt?: string;
+  className?: string;
+}) {
+  if (!src) {
+    return <div className="w-full h-[400px] bg-slate-100 rounded-xl" />;
+  }
+
+  return (
+    <div className={cn("overflow-hidden rounded-xl", className)}>
+      <img
+        src={src}
+        alt={alt}
+        className={
+          "w-full group-hover:scale-105 transition-all duration-300 object-cover"
+        }
+      />
+    </div>
+  );
+}
 
 export function PostPublishedAt({
   publishedAt,

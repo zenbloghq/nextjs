@@ -4,6 +4,7 @@ import Link from "next/link";
 import {
   PostCategory,
   PostDescription,
+  PostImage,
   PostPublishedAt,
   PostTitle,
 } from "@/components/blog";
@@ -32,34 +33,31 @@ export default async function BlogPage() {
           Stay up to date with the latest news and updates from the team!
         </p>
       </div>
-      <article className="md:flex gap-8">
-        <Link className="w-full" href={`/blog/${lastPost.slug}`}>
-          <img
-            loading="lazy"
-            width={800}
-            height={400}
-            className="rounded-lg object-cover w-full max-h-[360px]"
-            src={lastPost.cover_image}
-            alt={lastPost.title}
-          />
+      <article className="md:flex group">
+        <Link
+          href={`/blog/${lastPost.slug}`}
+          className="flex-1 overflow-hidden rounded-xl"
+        >
+          <PostImage src={lastPost.cover_image} alt={lastPost.title} />
         </Link>
-        <div className="md:max-w-xs flex flex-col gap-2 py-2">
+        <div className="md:max-w-sm flex-1 flex flex-col gap-2 mt-4 p-6">
           <div className="flex justify-between items-center">
             {lastPost.category?.slug ? (
               <PostCategory category={lastPost.category} />
             ) : null}
             <PostPublishedAt publishedAt={lastPost.published_at} />
           </div>
-          <Link href={`/blog/${lastPost.slug}`}>
-            <div className="space-y-2 text-center md:text-left">
-              <PostTitle as="h2" title={lastPost.title} size="lg" />
-              <PostDescription description={lastPost.excerpt || ""} />
-            </div>
+          <Link
+            className="space-y-3 text-center md:text-left"
+            href={`/blog/${lastPost.slug}`}
+          >
+            <PostTitle as="h2" title={lastPost.title} size="lg" />
+            <PostDescription description={lastPost.excerpt || ""} />
           </Link>
         </div>
       </article>
-      <hr />
-      <section className="flex flex-col gap-1 items-center">
+
+      <section className="flex flex-col gap-1 items-center px-4">
         <h2 className="text-sm font-semibold text-slate-500 tracking-wider">
           CATEGORIES
         </h2>
