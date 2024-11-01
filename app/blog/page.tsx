@@ -1,34 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import { cms } from "@/lib/cms";
-import { formatDate } from "@/lib/dates";
 import Link from "next/link";
-
-function PostPublishedAt({ publishedAt }: { publishedAt: string }) {
-  return (
-    <time className="text-sm font-medium text-slate-500">
-      {formatDate(publishedAt)}
-    </time>
-  );
-}
-
-function PostCategory({
-  category,
-}: {
-  category: { slug: string; name: string };
-}) {
-  return (
-    <Link
-      href={`/blog/categories/${category.slug}`}
-      className="text-orange-500 font-medium hover:underline"
-    >
-      {category.name}
-    </Link>
-  );
-}
-
-function PostDescription({ description }: { description: string }) {
-  return <p className="text-slate-600 text-balance">{description}</p>;
-}
+import {
+  PostCategory,
+  PostDescription,
+  PostPublishedAt,
+  PostTitle,
+} from "@/components/blog";
 
 export default async function BlogPage() {
   let posts;
@@ -74,7 +52,7 @@ export default async function BlogPage() {
           </div>
           <Link href={`/blog/${lastPost.slug}`}>
             <div className="space-y-2 text-center md:text-left">
-              <h2 className="text-3xl font-bold">{lastPost.title}</h2>
+              <PostTitle as="h2" title={lastPost.title} size="lg" />
               <PostDescription description={lastPost.excerpt || ""} />
             </div>
           </Link>
