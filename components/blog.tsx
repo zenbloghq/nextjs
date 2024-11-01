@@ -2,6 +2,7 @@ import { formatDate } from "@/lib/dates";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { cva } from "class-variance-authority";
+import { Category } from "zenblog/types";
 
 export function PostPublishedAt({
   publishedAt,
@@ -21,7 +22,7 @@ export function PostCategory({
   category,
   className,
 }: {
-  category: { slug: string; name: string };
+  category: Category;
   className?: string;
 }) {
   return (
