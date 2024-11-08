@@ -1,3 +1,4 @@
+import { BLOG_TITLE } from "@/lib/blog.constants";
 import Link from "next/link";
 
 export default function BlogLayout({
@@ -6,10 +7,10 @@ export default function BlogLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="max-w-5xl mx-auto">
-      <nav className="p-4 border-b border-gray-200 flex justify-between items-center">
+    <div className="max-w-5xl mx-auto bg-slate-50">
+      <nav className="p-4 border-b border-slate-200 flex justify-between items-center">
         <Link className="text-lg font-semibold" href="/">
-          Zenblog Next.js
+          {BLOG_TITLE}
         </Link>
         <Link href="/">Home</Link>
       </nav>

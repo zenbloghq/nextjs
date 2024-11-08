@@ -9,6 +9,10 @@ import {
   PostTitle,
 } from "@/components/blog";
 
+// Next.js will invalidate the cache when a
+// request comes in, at most once every 5 minutes.
+export const revalidate = 300;
+
 export default async function BlogPage() {
   let posts;
   try {
@@ -57,18 +61,12 @@ export default async function BlogPage() {
         </div>
       </article>
 
-      <section className="flex flex-col gap-1 items-center px-4">
-        <h2 className="text-sm font-semibold text-slate-500 tracking-wider">
-          CATEGORIES
-        </h2>
-        <ul className="flex gap-1 justify-center">
+      <section className="flex flex-col gap-1">
+        <ul className="flex gap-2">
           {categories.map((category) => (
-            <li
-              key={category.slug}
-              className="text-xl font-medium text-slate-800 hover:text-orange-600"
-            >
+            <li key={category.slug}>
               <Link
-                className="px-3 py-1 rounded-full hover:bg-orange-50"
+                className="px-3 font-medium text-slate-800 hover:text-orange-600 py-2 bg-white border rounded-full"
                 href={`/blog/categories/${category.slug}`}
               >
                 {category.name}
