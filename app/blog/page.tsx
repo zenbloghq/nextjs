@@ -14,17 +14,7 @@ import {
 export const revalidate = 300;
 
 export default async function BlogPage() {
-  let posts;
-  try {
-    posts = await cms.posts.list();
-  } catch (error) {
-    console.error(error);
-  }
-
-  if (!posts) {
-    return <div>Error trying to fetch posts.</div>;
-  }
-
+  const posts = await cms.posts.list();
   const { data: categories } = await cms.categories.list();
   const lastPost = posts.data[posts.data.length - 1];
   const postsWithoutLast = posts.data.slice(0, -1);

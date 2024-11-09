@@ -5,6 +5,22 @@ import { cn } from "@/lib/utils";
 import { cva } from "class-variance-authority";
 import { Category } from "zenblog/types";
 
+export function PostItem({
+  children,
+  className,
+  slug,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  slug: string;
+}) {
+  return (
+    <Link className={cn("group", className)} href={`/blog/${slug}`}>
+      {children}
+    </Link>
+  );
+}
+
 export function PostImage({
   src,
   alt,
@@ -23,8 +39,10 @@ export function PostImage({
       <img
         src={src}
         alt={alt}
+        height={400}
+        width={400}
         className={
-          "w-full group-hover:scale-105 transition-all duration-300 object-cover"
+          "w-full group-hover:scale-105 transition-all duration-300 object-cover max-h-[400px]"
         }
       />
     </div>

@@ -10,5 +10,4 @@ if (!blogId) {
 
 export const cms = createZenblogClient({
   blogId,
-  _debug: true,
 });
