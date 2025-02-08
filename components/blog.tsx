@@ -140,9 +140,11 @@ export function PostAuthor({
       <img
         src={author.image_url}
         alt={author.name}
-        className="w-6 h-6 rounded-full object-cover"
+        width={32}
+        height={32}
+        className="w-8 h-8 rounded-full object-cover"
       />
-      {author.name}
+      <span className="text-sm font-medium text-slate-500">{author.name}</span>
     </section>
   );
 }

@@ -48,10 +48,7 @@ export default async function BlogPage() {
             ) : null}
             <PostPublishedAt publishedAt={lastPost.published_at} />
           </div>
-          <Link
-            className="space-y-3 text-center md:text-left"
-            href={`/blog/${lastPost.slug}`}
-          >
+          <Link className="space-y-3 text-left" href={`/blog/${lastPost.slug}`}>
             <PostTitle as="h2" title={lastPost.title} size="lg" />
             <PostDescription description={lastPost.excerpt || ""} />
             <div className="flex gap-2">
@@ -100,6 +97,13 @@ export default async function BlogPage() {
                 <h2 className="md:text-2xl text-xl font-bold">{post.title}</h2>
                 <PostDescription description={post.excerpt || ""} />
               </Link>
+            </div>
+            <div>
+              <div className="flex gap-2 mt-4">
+                {lastPost.authors?.map((author) => (
+                  <PostAuthor key={author.slug} author={author} />
+                ))}
+              </div>
             </div>
           </article>
         ))}
