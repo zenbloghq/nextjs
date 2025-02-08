@@ -2,6 +2,7 @@
 import { cms } from "@/lib/cms";
 import Link from "next/link";
 import {
+  PostAuthor,
   PostCategory,
   PostDescription,
   PostImage,
@@ -16,8 +17,14 @@ export const revalidate = 300;
 export default async function BlogPage() {
   const posts = await cms.posts.list();
   const { data: categories } = await cms.categories.list();
-  const lastPost = posts.data[posts.data.length - 1];
-  const postsWithoutLast = posts.data.slice(0, -1);
+  const lastPost = posts.data.sort((a, b) => {
+    return (
+      new Date(b.published_at).getTime() - new Date(a.published_at).getTime()
+    );
+  })[0];
+  const postsWithoutLast = posts.data.filter(
+    (post) => post.slug !== lastPost.slug
+  );
 
   return (
     <div className="p-4 space-y-12">
@@ -47,6 +54,11 @@ export default async function BlogPage() {
           >
             <PostTitle as="h2" title={lastPost.title} size="lg" />
             <PostDescription description={lastPost.excerpt || ""} />
+            <div className="flex gap-2">
+              {lastPost.authors?.map((author) => (
+                <PostAuthor key={author.slug} author={author} />
+              ))}
+            </div>
           </Link>
         </div>
       </article>

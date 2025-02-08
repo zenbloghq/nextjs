@@ -3,7 +3,7 @@ import { formatDate } from "@/lib/dates";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { cva } from "class-variance-authority";
-import { Category } from "zenblog/types";
+import { Author, Category } from "zenblog/types";
 
 export function PostItem({
   children,
@@ -121,4 +121,28 @@ export function PostTitle({
   const Tag = as;
 
   return <Tag className={cn(titleSizes({ size, className }))}>{title}</Tag>;
+}
+
+export function PostAuthor({
+  author,
+  className,
+}: {
+  author: Author;
+  className?: string;
+}) {
+  return (
+    <section
+      className={cn(
+        "flex gap-2 items-center text-sm font-medium text-slate-500",
+        className
+      )}
+    >
+      <img
+        src={author.image_url}
+        alt={author.name}
+        className="w-6 h-6 rounded-full object-cover"
+      />
+      {author.name}
+    </section>
+  );
 }
